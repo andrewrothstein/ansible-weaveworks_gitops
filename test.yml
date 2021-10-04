@@ -1,0 +1,10 @@
+---
+- hosts: all
+  roles:
+  - role: '{{ playbook_dir }}'
+  tasks:
+  - command: /usr/local/bin/gitops version
+    register: gitops_test_output
+  - name: gitops version
+    debug:
+      msg: '{{ gitops_test_output.stdout }}'

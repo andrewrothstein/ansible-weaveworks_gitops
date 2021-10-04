@@ -1,0 +1,26 @@
+---
+- name: resolve platform specific vars
+  include_vars: '{{ item }}'
+  with_first_found:
+    - files:
+        - '{{ ansible_distribution }}-{{ ansible_distribution_release }}.yml'
+        - '{{ ansible_distribution }}.yml'
+        - '{{ ansible_os_family }}.yml'
+      skip: true
+      paths:
+        - '{{ role_path }}/vars'
+- name: downloading {{ gitops_url }} to {{ gitops_exe }}
+  become: true
+  become_user: root
+  get_url:
+    url: '{{ gitops_url }}'
+    dest: '{{ gitops_exe }}'
+    mode: 0755
+    checksum: '{{ gitops_checksum }}'
+- name: linking {{ gitops_link }} to {{ gitops_exe }}
+  become: true
+  become_user: root
+  file:
+    src: '{{ gitops_exe }}'
+    dest: '{{ gitops_link }}'
+    state: link

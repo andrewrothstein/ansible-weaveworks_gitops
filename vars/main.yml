@@ -1,0 +1,7 @@
+---
+# vars file for weaveworks_gitops
+gitops_platform: '{{ gitops_os }}-{{ gitops_arch }}'
+gitops_url: '{{ gitops_mirror }}/v{{ gitops_ver }}/gitops-{{ gitops_platform }}'
+gitops_checksum: '{{ gitops_checksums[gitops_ver][gitops_platform] }}'
+gitops_exe: '{{ gitops_install_dir }}/gitops-{{ gitops_platform }}-{{ gitops_ver }}'
+gitops_link: '{{ gitops_install_dir }}/gitops'
