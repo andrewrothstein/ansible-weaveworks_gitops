@@ -9,14 +9,44 @@
       skip: true
       paths:
         - '{{ role_path }}/vars'
-- name: downloading {{ gitops_url }} to {{ gitops_exe }}
+- name: check for install in {{ gitops_exe }}
   become: true
-  become_user: root
-  get_url:
-    url: '{{ gitops_url }}'
-    dest: '{{ gitops_exe }}'
-    mode: 0755
-    checksum: '{{ gitops_checksum }}'
+  stat:
+    path: '{{ gitops_exe }}'
+  changed_when: false
+  register: gitops_binary
+- when: not gitops_binary.stat.exists
+  block:
+    - name: downloading {{ gitops_url }} to {{ gitops_tmp_archive }}
+      become: true
+      become_user: root
+      get_url:
+        url: '{{ gitops_url }}'
+        dest: '{{ gitops_tmp_archive }}'
+        mode: 0644
+        checksum: '{{ gitops_checksum }}'
+    - name: mkdir {{ gitops_install_dir }}
+      become: true
+      become_user: root
+      file:
+        path: '{{ gitops_install_dir }}'
+        state: directory
+        mode: 0755
+    - name: unarchiving {{ gitops_tmp_archive }} into {{ gitops_install_dir }}
+      become: true
+      become_user: root
+      unarchive:
+        remote_src: true
+        src: '{{ gitops_tmp_archive }}'
+        dest: '{{ gitops_install_dir }}'
+        creates: '{{ gitops_exe }}'
+  always:
+    - name: rm {{ gitops_tmp_archive }}
+      become: true
+      become_user: root
+      file:
+        path: '{{ gitops_tmp_archive }}'
+        state: absent
 - name: linking {{ gitops_link }} to {{ gitops_exe }}
   become: true
   become_user: root

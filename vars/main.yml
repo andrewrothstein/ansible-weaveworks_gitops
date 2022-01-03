@@ -1,7 +1,12 @@
 ---
 # vars file for weaveworks_gitops
 gitops_platform: '{{ gitops_os }}-{{ gitops_arch }}'
-gitops_url: '{{ gitops_mirror }}/v{{ gitops_ver }}/gitops-{{ gitops_platform }}'
+gitops_name: gitops-{{ gitops_platform }}
+gitops_archive: '{{ gitops_name }}.{{ gitops_archive_type | default("tar.gz") }}'
+gitops_tmp_archive: /tmp/{{ gitops_archive }}
+gitops_url: '{{ gitops_mirror }}/v{{ gitops_ver }}/{{ gitops_archive }}'
 gitops_checksum: '{{ gitops_checksums[gitops_ver][gitops_platform] }}'
-gitops_exe: '{{ gitops_install_dir }}/gitops-{{ gitops_platform }}-{{ gitops_ver }}'
-gitops_link: '{{ gitops_install_dir }}/gitops'
+
+gitops_install_dir: '{{ gitops_parent_install_dir }}/{{ gitops_name }}-{{ gitops_ver }}'
+gitops_exe: '{{ gitops_install_dir }}/gitops'
+gitops_link: '{{ gitops_parent_install_dir }}/bin/gitops'
