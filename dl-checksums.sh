@@ -40,4 +40,4 @@ dl_ver() {
     dl $ver $app $lchecksums linux x86_64
 }
 
-dl_ver ${1:-0.6.0} gitops
+dl_ver ${1:-0.6.2} gitops
