@@ -1,5 +1,7 @@
 ---
 # vars file for weaveworks_gitops
+gitops_os: '{{ ansible_system | lower }}'
+gitops_arch: '{{ gitops_arch_map[ansible_architecture] }}'
 gitops_platform: '{{ gitops_os }}-{{ gitops_arch }}'
 gitops_name: gitops-{{ gitops_platform }}
 gitops_archive: '{{ gitops_name }}.{{ gitops_archive_type | default("tar.gz") }}'

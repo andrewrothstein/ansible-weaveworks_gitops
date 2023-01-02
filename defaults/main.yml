@@ -1,9 +1,12 @@
 ---
 # defaults file for weaveworks_gitops
-gitops_ver: 0.6.2
+gitops_ver: 0.13.0
 gitops_mirror: https://github.com/weaveworks/weave-gitops/releases/download
-gitops_os: linux
-gitops_arch: x86_64
+gitops_arch_map:
+  aarch64: arm64
+  arm: arm
+  arm64: arm64
+  x86_64: x86_64
 gitops_parent_install_dir: /usr/local
 gitops_checksums:
   # https://github.com/weaveworks/weave-gitops/releases/download/v0.5.0/gitops_checksums.txt
@@ -42,3 +45,15 @@ gitops_checksums:
     linux-arm: sha256:7aa05a56e079664ed296bd5d9ce26b6b9f25cf8b1e20e658ca5e2690414313ed
     # https://github.com/weaveworks/weave-gitops/releases/download/v0.6.2/gitops-linux-x86_64.tar.gz
     linux-x86_64: sha256:b8af780e9c1981fb6752527167d7c593163738f7483b0b0278efe57dee560b1e
+  # https://github.com/weaveworks/weave-gitops/releases/download/v0.13.0/gitops_checksums.txt
+  '0.13.0':
+    # https://github.com/weaveworks/weave-gitops/releases/download/v0.13.0/gitops-darwin-arm64.tar.gz
+    darwin-arm64: sha256:3791c1ae9a2cc75275652ac4f767b148e32e7086cad77cf1350451c843483e4c
+    # https://github.com/weaveworks/weave-gitops/releases/download/v0.13.0/gitops-darwin-x86_64.tar.gz
+    darwin-x86_64: sha256:0b01c25fa1c410fd5a8f6bc8b18ec8a3d76ebe94f304b74d7ef519f3ef6d3b52
+    # https://github.com/weaveworks/weave-gitops/releases/download/v0.13.0/gitops-linux-arm64.tar.gz
+    linux-arm64: sha256:e8e1deb6ff208153e5fce9f0b79d61eea1ff3fe594344ac4c940811bc040b5db
+    # https://github.com/weaveworks/weave-gitops/releases/download/v0.13.0/gitops-linux-arm.tar.gz
+    linux-arm: sha256:50a138c2b4ab0bec8b02e87528f19ac5d3858bd61089ccf0c3fb88b1bec7639d
+    # https://github.com/weaveworks/weave-gitops/releases/download/v0.13.0/gitops-linux-x86_64.tar.gz
+    linux-x86_64: sha256:f9b7cf28c54e41c22e599906132545824cab08926e110eb933d7755ef16f79ab

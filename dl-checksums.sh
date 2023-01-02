@@ -27,7 +27,7 @@ dl_ver() {
     local lchecksums="$DIR/${app}_${ver}_checksums.txt"
     if [ ! -e $lchecksums ];
     then
-        wget -q -O $lchecksums $url
+        curl -sSLf -o $lchecksums $url
     fi
 
     printf "  # %s\n" $url
@@ -40,4 +40,4 @@ dl_ver() {
     dl $ver $app $lchecksums linux x86_64
 }
 
-dl_ver ${1:-0.6.2} gitops
+dl_ver ${1:-0.13.0} gitops

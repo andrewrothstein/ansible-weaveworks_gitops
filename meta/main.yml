@@ -31,6 +31,3 @@ galaxy_info:
   galaxy_tags:
     - development
   role_name: weaveworks_gitops
-
-dependencies:
-  - andrewrothstein.unarchive-deps
